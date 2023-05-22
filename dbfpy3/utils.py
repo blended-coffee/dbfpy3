@@ -63,6 +63,8 @@ def get_date(date=None):
             # yymmdd
             return datetime.date(*time.strptime(date, "%y%m%d")[:3])
         # yyyymmdd
+ 
+        print(date)
         return datetime.date(*time.strptime(date, "%Y%m%d")[:3])
     if hasattr(date, "__getitem__"):
         # a sequence (assuming date/time tuple)

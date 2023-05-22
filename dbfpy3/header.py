@@ -126,6 +126,7 @@ class DbfHeader():
         # http://msdn.microsoft.com/en-us/library/aa975386%28v=vs.71%29.aspx
         stream.seek(0)
         data = stream.read(32)
+        # print(data)
         if data is None or len(data) < 32:
             raise ValueError('header data less than 32 bytes')
 
@@ -148,20 +149,22 @@ class DbfHeader():
         # read fields definition
         fields = []
         # position 0 is for the deletion flag
-        pos = 1
+        pos = 2
         while True:
             data = stream.read(32)
+            #print(data)
             if len(data) < 32 or data[0] == 0x0D:
                 break
             field = DbfFields.parse(data, pos)
             if pos != field.start:
-                raise ValueError(
-                    'dbf fields definition is corrupt, '
-                    'fields start does not match.'
-                )
+                field.start = pos
+                # raise ValueError(
+                #     'dbf fields definition is corrupt, '
+                #     'fields start does not match.'
+                # )
             fields.append(field)
             pos = field.start + field.length
-
+         
         # DbfHeader instance
         return cls(
             fields=fields,

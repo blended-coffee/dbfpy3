@@ -246,7 +246,13 @@ class DbfCharacterField(DbfField):
 
         Return value is a ``value`` argument with stripped right spaces.
         """
-        return value.decode(encoding).rstrip(" ")
+        try:
+          
+            return value.decode(encoding).rstrip(" ")
+        except:
+         
+            return value
+        
 
     def encode(self, value, encoding=locale.getpreferredencoding()):
         """Return raw data string encoded from a ``value``."""
@@ -348,6 +354,7 @@ class DbfLogicalField(DbfField):
             return False
         if value in b"YyTt":
             return True
+        print(value)
         raise ValueError("[%s] Invalid logical value %r" % (self.name, value))
 
     def encode(self, value, encoding=None):

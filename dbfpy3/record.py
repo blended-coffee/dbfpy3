@@ -117,10 +117,12 @@ class DbfRecord(object):
             # FIXME: validate file position
             stream.seek(self.position)
             string = stream.read(self.header.record_length)
-        if string[0:1] not in b' *':
-            raise ValueError('Record deleted flag error ({})', string[0])
+        print(string[0:1])
+        # if string[0:1] not in [b' *']:
+        #     raise ValueError('Record deleted flag error ({})', string[0])
         self.deleted = (string[0:1] == b'*')
         self.fields = self.decode(string)
+        print(self.fields)
         return self
 
     def __str__(self):
