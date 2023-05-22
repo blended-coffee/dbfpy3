@@ -3,6 +3,21 @@ Python 3 modules for accessing .dbf files
 
 Forked from https://github.com/steelywing/dbfpy.
 
+### Bench Installation 
+
+
+``` 
+  cd frappe-bench
+  git clone https://github.com/blended-coffee/dbfpy3.git
+  source env/bin/activate
+  pip install ./dbfpy3
+  deactivate
+
+```
+
+
+
+
 ### Features
 
 * Support FoxPro
